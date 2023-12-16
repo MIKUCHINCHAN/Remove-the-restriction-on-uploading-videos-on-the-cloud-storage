@@ -19,7 +19,7 @@ for  _ in ALL_FILES:
 
     print("⬛⬛⬛⬛⬛⬛正在处理：",_)
     # 获取视频信息
-    res =  subprocess.Popen(f'ffprobe -i {_}', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    res =  subprocess.Popen(f'''ffprobe -i "{_}"''', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     content=str(res.stdout.read(),'utf-8')
     res.stdout.close()  # 关闭
     duration=re.search("\d\d:\d\d:\d\d", content, flags=0).group()  #视频持续时间
@@ -43,9 +43,9 @@ for  _ in ALL_FILES:
     print("⬛⬛⬛⬛⬛⬛new_duration：",new_duration)
 
     # 剪辑1秒
-    res = subprocess.Popen(f'''ffmpeg -ss 00:00:00 -to {new_duration} -i {_} -c:v copy {_.split(_.split('.')[-1])[0]+"_output."+_.split('.')[-1]}''', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    res = subprocess.Popen(f'''ffmpeg -ss 00:00:00 -to {new_duration} -i "{_}" -c:v copy "{_.split(_.split('.')[-1])[0]+"_output."+_.split('.')[-1]}"''', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-    # print(f'''⬛⬛⬛⬛⬛⬛code：ffmpeg -ss 00:00:00 -to {new_duration} -i {_} -c:v copy {_.split(_.split('.')[-1])[0]+"_output."+_.split('.')[-1]}''')
+    print(f'''⬛⬛⬛⬛⬛⬛code：ffmpeg -ss 00:00:00 -to {new_duration} -i '{_}' -c:v copy "{_.split(_.split('.')[-1])[0]+"_output."+_.split('.')[-1]}''')
 
     content = str(res.stdout.read(), 'utf-8')
     res.stdout.close()  # 关闭
