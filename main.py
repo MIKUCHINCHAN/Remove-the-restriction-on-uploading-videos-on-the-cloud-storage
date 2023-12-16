@@ -34,11 +34,12 @@ for  _ in ALL_FILES:
 
     if second =='00':
         if minute != '00':
-            new_duration =hour+":"+str(eval(minute)-1).rjust(2, '0')+":"+minute
+            new_duration =hour+":"+str(int(minute)-1).rjust(2, '0')+":"+minute
         else:
-            new_duration = str(eval(hour) - 1).rjust(2, '0') + ":" +"59" + ":" +"00"
+            new_duration = str(int(hour) - 1).rjust(2, '0') + ":" +"59" + ":" +"00"
     else:
-        new_duration = hour + ":" + minute + ":" + str(eval(second) - 1).rjust(2, '0')
+
+        new_duration = hour + ":" + minute + ":" + str(int(second) - 1).rjust(2, '0')
 
     print("⬛⬛⬛⬛⬛⬛new_duration：",new_duration)
 
